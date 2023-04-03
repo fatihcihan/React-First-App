@@ -1,27 +1,34 @@
-var productName = "Iphone 14";
-var productPrice = 40000;
 
 var product = {
     name: "IPhone 15",
-    price: 55000
+    price: 40000
+    // description: "nice phone"
 }
 
 function formatPrice(product) {
-    return product.price + " TL"
+    return <p> {product.price} TL </p>
 }
+
+// function printDescription(product) {
+//     if (product.description) {
+//         return <p>{product.description}</p>;
+//     }
+// }
 
 var template =
     <div>
         <h1 id="header">Product List !</h1>
-        <div class="product-details">
+        <div id="product-details">
             <h2>{product.name}</h2>
-            <p>{formatPrice(product)}</p>
+            {(product.price && product.price > 0) && formatPrice(product)}
+            {/* { printDescription(product) } */}
+            {product.description && <p>{product.description}</p>}
             <ul>
                 <li>Lorem, ipsum.</li>
                 <li>Lorem, ipsum.</li>
                 <li>Lorem, ipsum.</li>
             </ul>
         </div>
-    </div>;
+    </div >;
 var root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(template);
