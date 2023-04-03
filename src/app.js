@@ -1,8 +1,9 @@
 
 var product = {
     name: "IPhone 15",
-    price: 40000
-    // description: "nice phone"
+    price: 40000,
+    description: "nice phone",
+    colors: ["Silver", "Red", "White"]
 }
 
 function formatPrice(product) {
@@ -19,10 +20,13 @@ var template =
     <div>
         <h1 id="header">Product List !</h1>
         <div id="product-details">
-            <h2>{product.name}</h2>
+            {(product.name && product.name.length > 3) ? <h2> {product.name} </h2> : <p>product name not entered</p>}
             {(product.price && product.price > 0) && formatPrice(product)}
             {/* { printDescription(product) } */}
             {product.description && <p>{product.description}</p>}
+
+            {product.colors.length > 0 ? <p> color options available</p> : ""}
+
             <ul>
                 <li>Lorem, ipsum.</li>
                 <li>Lorem, ipsum.</li>
