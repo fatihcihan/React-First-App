@@ -18,11 +18,9 @@ function formatPrice(product) {
     return <p> {product.price} TL </p>
 }
 
-// function printDescription(product) {
-//     if (product.description) {
-//         return <p>{product.description}</p>;
-//     }
-// }
+function addProduct(event, productName) {
+    console.log(event.target, productName);
+}
 
 var template =
     <div>
@@ -30,16 +28,9 @@ var template =
         {
             products.map((product, index) => (
                 <div className="product-details" key={index}>
-                    {(product.name && product.name.length > 3) ? <h2> {product.name} </h2> : <p>product name not entered</p>}
-                    {(product.price && product.price > 0) && formatPrice(product)}
-                    {/* { printDescription(product) } */}
-                    {product.description && <p>{product.description}</p>}
-                    {product.colors.length > 0 ? <p> color options available</p> : ""}
-                    <ul>
-                        {
-                            product.colors.map((color, index) => (<li key={index}> {color}</li>))
-                        }
-                    </ul>
+                    {<h2> {product.name} </h2>}
+                    {product.price}
+                    <button type="button" id={index} onClick={(event) => addProduct(event, product.name)}>Add</button>
                 </div>
             ))
         }
