@@ -16,17 +16,42 @@ var selectedProducts = [];
 function formatPrice(product) {
   return /*#__PURE__*/React.createElement("p", null, " ", product.price, " TL ");
 }
-function addProduct(event, productName) {
+function selectProduct(event, productName) {
   console.log(event.target, productName);
   if (!selectedProducts.includes(productName)) {
     selectedProducts.push(productName);
   }
   renderApp();
 }
+function saveProduct(event) {
+  event.preventDefault();
+  var productName = event.target.elements.productName.value;
+  var productPrice = event.target.elements.productPrice.value;
+  var product = {
+    name: productName,
+    price: productPrice
+  };
+  products.push(product);
+  event.target.elements.productName.value = "";
+  event.target.elements.productPrice.value = "";
+  renderApp();
+}
 function renderApp() {
   var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
     id: "header"
-  }, "Product List "), /*#__PURE__*/React.createElement("h3", null, "Selected Products: ", selectedProducts.length), products.map(function (product, index) {
+  }, "Product List "), /*#__PURE__*/React.createElement("h3", null, "Selected Products: ", selectedProducts.length), /*#__PURE__*/React.createElement("form", {
+    onSubmit: saveProduct
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "productName",
+    id: "productName"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "productPrice",
+    id: "productPrice"
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Add Product")), products.map(function (product, index) {
     return /*#__PURE__*/React.createElement("div", {
       className: "product-details",
       key: index
@@ -34,7 +59,7 @@ function renderApp() {
       type: "button",
       id: index,
       onClick: function onClick(event) {
-        return addProduct(event, product.name);
+        return selectProduct(event, product.name);
       }
     }, "Add"));
   }));
