@@ -1,7 +1,6 @@
 var root = ReactDOM.createRoot(document.getElementById("root"));
 
 // Function Component
-
 /* function Header(props) {
     console.log(props);
     return (
@@ -12,6 +11,22 @@ var root = ReactDOM.createRoot(document.getElementById("root"));
 } */
 
 // Class Component
+class TodoApp extends React.Component {
+    render() {
+        const data = {
+            title: "Todo Application",
+            description: "Pending Tasks",
+            items: ['Task 1', 'Task 2', 'Task 3']
+        }
+        return (
+            <div>
+                <Header title={data.title} description={data.description} />
+                <TodoList items={data.items} />
+            </div>
+        );
+    }
+}
+
 class Header extends React.Component {
     render() {
         return (
@@ -23,30 +38,37 @@ class Header extends React.Component {
     }
 }
 
-class TodoApp extends React.Component {
+
+/* function TodoList(props) {
+    return (
+        <ul>
+            {
+                props.items.map((item, index) => <TodoItem key={index} item={item} />)
+            }
+        </ul>
+    );
+} */
+
+class TodoList extends React.Component {
     render() {
         return (
-            <div>
-                <Header title="Todo App" description="Pending Tasks" />
-                <ToDo />
-            </div>
-        );
+            <ul>
+                {
+                    this.props.items.map((item, index) => <TodoItem key={index} item={item} />)
+                }
+            </ul>)
+    }
+}
+
+/* function TodoItem(props) {
+    return <li> {props.item} </li>
+} */
+
+class TodoItem extends React.Component {
+    render() {
+        return <li> {this.props.item} </li>
     }
 }
 
 
-function ToDo(props) {
-    return (
-        <ul>
-            <li>Task 1</li>
-            <li>Task 2</li>
-            <li>Task 3</li>
-        </ul>
-    );
-}
-
-var template =
-
-
-
-    root.render(<TodoApp />);
+root.render(<TodoApp />);

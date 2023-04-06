@@ -16,7 +16,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 var root = ReactDOM.createRoot(document.getElementById("root"));
 
 // Function Component
-
 /* function Header(props) {
     console.log(props);
     return (
@@ -27,12 +26,37 @@ var root = ReactDOM.createRoot(document.getElementById("root"));
 } */
 
 // Class Component
-var Header = /*#__PURE__*/function (_React$Component) {
-  _inherits(Header, _React$Component);
-  var _super = _createSuper(Header);
+var TodoApp = /*#__PURE__*/function (_React$Component) {
+  _inherits(TodoApp, _React$Component);
+  var _super = _createSuper(TodoApp);
+  function TodoApp() {
+    _classCallCheck(this, TodoApp);
+    return _super.apply(this, arguments);
+  }
+  _createClass(TodoApp, [{
+    key: "render",
+    value: function render() {
+      var data = {
+        title: "Todo Application",
+        description: "Pending Tasks",
+        items: ['Task 1', 'Task 2', 'Task 3']
+      };
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
+        title: data.title,
+        description: data.description
+      }), /*#__PURE__*/React.createElement(TodoList, {
+        items: data.items
+      }));
+    }
+  }]);
+  return TodoApp;
+}(React.Component);
+var Header = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Header, _React$Component2);
+  var _super2 = _createSuper(Header);
   function Header() {
     _classCallCheck(this, Header);
-    return _super.apply(this, arguments);
+    return _super2.apply(this, arguments);
   }
   _createClass(Header, [{
     key: "render",
@@ -42,25 +66,51 @@ var Header = /*#__PURE__*/function (_React$Component) {
   }]);
   return Header;
 }(React.Component);
-var TodoApp = /*#__PURE__*/function (_React$Component2) {
-  _inherits(TodoApp, _React$Component2);
-  var _super2 = _createSuper(TodoApp);
-  function TodoApp() {
-    _classCallCheck(this, TodoApp);
-    return _super2.apply(this, arguments);
+/* function TodoList(props) {
+    return (
+        <ul>
+            {
+                props.items.map((item, index) => <TodoItem key={index} item={item} />)
+            }
+        </ul>
+    );
+} */
+var TodoList = /*#__PURE__*/function (_React$Component3) {
+  _inherits(TodoList, _React$Component3);
+  var _super3 = _createSuper(TodoList);
+  function TodoList() {
+    _classCallCheck(this, TodoList);
+    return _super3.apply(this, arguments);
   }
-  _createClass(TodoApp, [{
+  _createClass(TodoList, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
-        title: "Todo App",
-        description: "Pending Tasks"
-      }), /*#__PURE__*/React.createElement(ToDo, null));
+      return /*#__PURE__*/React.createElement("ul", null, this.props.items.map(function (item, index) {
+        return /*#__PURE__*/React.createElement(TodoItem, {
+          key: index,
+          item: item
+        });
+      }));
     }
   }]);
-  return TodoApp;
+  return TodoList;
 }(React.Component);
-function ToDo(props) {
-  return /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, "Task 1"), /*#__PURE__*/React.createElement("li", null, "Task 2"), /*#__PURE__*/React.createElement("li", null, "Task 3"));
-}
-var template = root.render( /*#__PURE__*/React.createElement(TodoApp, null));
+/* function TodoItem(props) {
+    return <li> {props.item} </li>
+} */
+var TodoItem = /*#__PURE__*/function (_React$Component4) {
+  _inherits(TodoItem, _React$Component4);
+  var _super4 = _createSuper(TodoItem);
+  function TodoItem() {
+    _classCallCheck(this, TodoItem);
+    return _super4.apply(this, arguments);
+  }
+  _createClass(TodoItem, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("li", null, " ", this.props.item, " ");
+    }
+  }]);
+  return TodoItem;
+}(React.Component);
+root.render( /*#__PURE__*/React.createElement(TodoApp, null));
