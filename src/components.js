@@ -12,16 +12,28 @@ var root = ReactDOM.createRoot(document.getElementById("root"));
 
 // Class Component
 class TodoApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.clearItems = this.clearItems.bind(this);
+        this.state = {
+            items: ['Task 1', 'Task 2', 'Task 3']
+        }
+    }
+    clearItems() {
+        this.setState({
+            items: []
+        });
+    }
+
     render() {
         const data = {
             title: "Todo Application",
             description: "Pending Tasks",
-            items: ['Task 1', 'Task 2', 'Task 3']
         }
         return (
             <div>
                 <Header title={data.title} description={data.description} />
-                <TodoList items={data.items} />
+                <TodoList items={this.state.items} clear={this.clearItems} />
                 <NewItem />
             </div>
         );
@@ -51,14 +63,7 @@ class Header extends React.Component {
 } */
 
 class TodoList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.clearItems = this.clearItems.bind(this);
-    }
-    clearItems() {
-        console.log("clear items");
-        console.log(this.props.items);
-    }
+
     render() {
         return (
             <div>
@@ -67,7 +72,7 @@ class TodoList extends React.Component {
                         this.props.items.map((item, index) => <TodoItem key={index} item={item} />)
                     }
                 </ul>
-                <button onClick={this.clearItems}>Clear</button>
+                <button onClick={this.props.clear}>Clear</button>
             </div>
         );
     }

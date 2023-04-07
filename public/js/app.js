@@ -29,23 +29,36 @@ var root = ReactDOM.createRoot(document.getElementById("root"));
 var TodoApp = /*#__PURE__*/function (_React$Component) {
   _inherits(TodoApp, _React$Component);
   var _super = _createSuper(TodoApp);
-  function TodoApp() {
+  function TodoApp(props) {
+    var _this;
     _classCallCheck(this, TodoApp);
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.clearItems = _this.clearItems.bind(_assertThisInitialized(_this));
+    _this.state = {
+      items: ['Task 1', 'Task 2', 'Task 3']
+    };
+    return _this;
   }
   _createClass(TodoApp, [{
+    key: "clearItems",
+    value: function clearItems() {
+      this.setState({
+        items: []
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var data = {
         title: "Todo Application",
-        description: "Pending Tasks",
-        items: ['Task 1', 'Task 2', 'Task 3']
+        description: "Pending Tasks"
       };
       return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
         title: data.title,
         description: data.description
       }), /*#__PURE__*/React.createElement(TodoList, {
-        items: data.items
+        items: this.state.items,
+        clear: this.clearItems
       }), /*#__PURE__*/React.createElement(NewItem, null));
     }
   }]);
@@ -78,20 +91,11 @@ var Header = /*#__PURE__*/function (_React$Component2) {
 var TodoList = /*#__PURE__*/function (_React$Component3) {
   _inherits(TodoList, _React$Component3);
   var _super3 = _createSuper(TodoList);
-  function TodoList(props) {
-    var _this;
+  function TodoList() {
     _classCallCheck(this, TodoList);
-    _this = _super3.call(this, props);
-    _this.clearItems = _this.clearItems.bind(_assertThisInitialized(_this));
-    return _this;
+    return _super3.apply(this, arguments);
   }
   _createClass(TodoList, [{
-    key: "clearItems",
-    value: function clearItems() {
-      console.log("clear items");
-      console.log(this.props.items);
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("ul", null, this.props.items.map(function (item, index) {
@@ -100,7 +104,7 @@ var TodoList = /*#__PURE__*/function (_React$Component3) {
           item: item
         });
       })), /*#__PURE__*/React.createElement("button", {
-        onClick: this.clearItems
+        onClick: this.props.clear
       }, "Clear"));
     }
   }]);
