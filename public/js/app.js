@@ -82,12 +82,21 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log("component created");
+      var jsonObject = localStorage.getItem("items");
+      var items = JSON.parse(jsonObject);
+      if (items) {
+        this.setState({
+          items: items
+        });
+      }
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      console.log("component updated");
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.items.length !== this.state.items.length) {
+        var jsonString = JSON.stringify(this.state.items);
+        localStorage.setItem("items", jsonString);
+      }
     }
   }]);
   return TodoApp;

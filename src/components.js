@@ -54,12 +54,25 @@ class TodoApp extends React.Component {
         );
     }
 
-    componentDidMount(){
-        console.log("component created");
+    componentDidMount() {
+        const jsonObject = localStorage.getItem("items");
+        const items = JSON.parse(jsonObject);
+        if (items) {
+            this.setState({
+                items: items
+            })
+        }
+
     }
 
-    componentDidUpdate(){
-        console.log("component updated");
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.items.length !== this.state.items.length) {
+            const jsonString = JSON.stringify(this.state.items);
+            localStorage.setItem("items", jsonString);
+        }
+
+
+
     }
 }
 
@@ -123,7 +136,7 @@ class NewItem extends React.Component {
         )
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log("new item component");
     }
 }
@@ -145,7 +158,7 @@ class TodoItem extends React.Component {
         );
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log("item deleted");
     }
 }
