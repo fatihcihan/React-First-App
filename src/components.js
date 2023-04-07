@@ -22,6 +22,7 @@ class TodoApp extends React.Component {
             <div>
                 <Header title={data.title} description={data.description} />
                 <TodoList items={data.items} />
+                <NewItem />
             </div>
         );
     }
@@ -50,19 +51,50 @@ class Header extends React.Component {
 } */
 
 class TodoList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.clearItems = this.clearItems.bind(this);
+    }
+    clearItems() {
+        console.log("clear items");
+        console.log(this.props.items);
+    }
     render() {
         return (
-            <ul>
-                {
-                    this.props.items.map((item, index) => <TodoItem key={index} item={item} />)
-                }
-            </ul>)
+            <div>
+                <ul>
+                    {
+                        this.props.items.map((item, index) => <TodoItem key={index} item={item} />)
+                    }
+                </ul>
+                <button onClick={this.clearItems}>Clear</button>
+            </div>
+        );
     }
 }
 
 /* function TodoItem(props) {
     return <li> {props.item} </li>
 } */
+
+class NewItem extends React.Component {
+    onFormSubmit(e) {
+        e.preventDefault();
+        const item = e.target.elements.txtItem.value.trim();
+        if (item) {
+            e.target.elements.txtItem.value = "";
+            console.log(item);
+        }
+    }
+    render() {
+        return (
+            <form onSubmit={this.onFormSubmit}>
+                <input type="text" name="txtItem" />
+                <button type="submit">Add</button>
+            </form>
+        )
+    }
+}
 
 class TodoItem extends React.Component {
     render() {
