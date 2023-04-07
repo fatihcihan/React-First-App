@@ -1,16 +1,5 @@
 var root = ReactDOM.createRoot(document.getElementById("root"));
 
-// Function Component
-/* function Header(props) {
-    console.log(props);
-    return (
-        <div>
-            <h1>{props.title}</h1>
-            <p>{props.description}</p>
-        </div>);
-} */
-
-// Class Component
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
@@ -64,18 +53,7 @@ class Header extends React.Component {
 }
 
 
-/* function TodoList(props) {
-    return (
-        <ul>
-            {
-                props.items.map((item, index) => <TodoItem key={index} item={item} />)
-            }
-        </ul>
-    );
-} */
-
 class TodoList extends React.Component {
-
     render() {
         return (
             <div>
@@ -90,9 +68,6 @@ class TodoList extends React.Component {
     }
 }
 
-/* function TodoItem(props) {
-    return <li> {props.item} </li>
-} */
 
 class NewItem extends React.Component {
     constructor(props) {
@@ -131,6 +106,5 @@ class TodoItem extends React.Component {
         return <li> {this.props.item} </li>
     }
 }
-
 
 root.render(<TodoApp />);

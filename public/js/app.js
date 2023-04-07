@@ -14,18 +14,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 var root = ReactDOM.createRoot(document.getElementById("root"));
-
-// Function Component
-/* function Header(props) {
-    console.log(props);
-    return (
-        <div>
-            <h1>{props.title}</h1>
-            <p>{props.description}</p>
-        </div>);
-} */
-
-// Class Component
 var TodoApp = /*#__PURE__*/function (_React$Component) {
   _inherits(TodoApp, _React$Component);
   var _super = _createSuper(TodoApp);
@@ -94,15 +82,6 @@ var Header = /*#__PURE__*/function (_React$Component2) {
   }]);
   return Header;
 }(React.Component);
-/* function TodoList(props) {
-    return (
-        <ul>
-            {
-                props.items.map((item, index) => <TodoItem key={index} item={item} />)
-            }
-        </ul>
-    );
-} */
 var TodoList = /*#__PURE__*/function (_React$Component3) {
   _inherits(TodoList, _React$Component3);
   var _super3 = _createSuper(TodoList);
@@ -125,9 +104,6 @@ var TodoList = /*#__PURE__*/function (_React$Component3) {
   }]);
   return TodoList;
 }(React.Component);
-/* function TodoItem(props) {
-    return <li> {props.item} </li>
-} */
 var NewItem = /*#__PURE__*/function (_React$Component4) {
   _inherits(NewItem, _React$Component4);
   var _super4 = _createSuper(NewItem);
