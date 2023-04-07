@@ -15,13 +15,25 @@ class TodoApp extends React.Component {
     constructor(props) {
         super(props);
         this.clearItems = this.clearItems.bind(this);
+        this.addItem = this.addItem.bind(this);
         this.state = {
             items: ['Task 1', 'Task 2', 'Task 3']
         }
     }
+
     clearItems() {
         this.setState({
             items: []
+        });
+    }
+
+    addItem(item) {
+        if (this.state.items.indexOf(item) > -1) {
+            return 'you cannot add the same element';
+        }
+
+        this.setState((prevState) => {
+            return { items: prevState.items.concat(item) }
         });
     }
 
@@ -34,7 +46,7 @@ class TodoApp extends React.Component {
             <div>
                 <Header title={data.title} description={data.description} />
                 <TodoList items={this.state.items} clear={this.clearItems} />
-                <NewItem />
+                <NewItem addItem={this.addItem} />
             </div>
         );
     }
@@ -83,20 +95,33 @@ class TodoList extends React.Component {
 } */
 
 class NewItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.state = {
+            error: ''
+        }
+    }
     onFormSubmit(e) {
         e.preventDefault();
         const item = e.target.elements.txtItem.value.trim();
         if (item) {
             e.target.elements.txtItem.value = "";
-            console.log(item);
+            const error = this.props.addItem(item);
+            this.setState({
+                error: error
+            })
         }
     }
     render() {
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <input type="text" name="txtItem" />
-                <button type="submit">Add</button>
-            </form>
+            <div>
+                {this.state.error && <p>{this.state.error}</p>}
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" name="txtItem" />
+                    <button type="submit">Add</button>
+                </form>
+            </div>
         )
     }
 }
