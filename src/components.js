@@ -49,10 +49,18 @@ class TodoApp extends React.Component {
             description: "Pending Tasks",
         }
         return (
-            <div>
-                <Header title={data.title} description={data.description} />
-                <TodoList items={this.state.items} clear={this.clearItems} deleteItem={this.deleteItem} />
-                <NewItem addItem={this.addItem} />
+            <div className="container my-3">
+                <div className="card">
+                    <div className="card-header">
+                        <Header title={data.title} description={data.description} />
+                    </div>
+                    <div className="card-body">
+                        <TodoList items={this.state.items} clear={this.clearItems} deleteItem={this.deleteItem} />
+                    </div>
+                    <div className="card-footer">
+                        <NewItem addItem={this.addItem} />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -82,8 +90,8 @@ class TodoApp extends React.Component {
 
 const Header = (props) => {
     return (
-        <div>
-            <h1>{props.title}</h1>
+        <div className="text-center">
+            <h1 className="h3">{props.title}</h1>
             <p>{props.description}</p>
         </div>
     );
@@ -92,13 +100,22 @@ const Header = (props) => {
 const TodoList = (props) => {
     return (
         <div>
-            <ul>
+            <ul className="list-group">
                 {
-                    props.items.map((item, index) =>
-                        <TodoItem key={index} item={item} deleteItem={props.deleteItem} />)
+                    props.items.map((item, index) => <TodoItem key={index} item={item} deleteItem={props.deleteItem} />)
                 }
             </ul>
-            <button onClick={props.clear}>Clear</button>
+            {
+                props.items.length > 0
+                    ?
+                    <p>
+                        <button className="btn btn-outline-danger float-end mt-3" onClick={props.clear}>Clear</button>
+                    </p>
+                    :
+                    <div className="alert alert-warning">
+                        Add a task
+                    </div>
+            }
         </div>
     );
 }
@@ -127,8 +144,10 @@ class NewItem extends React.Component {
             <div>
                 {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.onFormSubmit}>
-                    <input type="text" name="txtItem" />
-                    <button type="submit">Add</button>
+                    <div className="input-group">
+                        <input className="form-control" type="text" name="txtItem" />
+                        <button className="btn btn-primary" type="submit">Add</button>
+                    </div>
                 </form>
             </div>
         )
@@ -141,9 +160,9 @@ class NewItem extends React.Component {
 
 const TodoItem = (props) => {
     return (
-        <li>
+        <li className="list-group-item">
             {props.item}
-            <button onClick={() => { props.deleteItem(props.item) }}>X</button>
+            <button className="btn btn-danger btn-sm float-end" onClick={() => { props.deleteItem(props.item) }}>X</button>
         </li>
     );
 }
